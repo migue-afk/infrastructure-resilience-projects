@@ -163,21 +163,21 @@ Since images were backed up without clear tags, they had to be loaded and manual
 1. **Load the image (initially untagged):**
     
     ```bash
-    sudo docker load -i /path/to/image.tar
+        sudo docker load -i /path/to/image.tar
     ```
     
     The output would be:
     
     ```bash
-	REPOSITORY TAG IMAGE ID  
-	1a072cac928d  
+	    REPOSITORY      TAG        IMAGE ID  
+        <none>          <none>     1a072cac928d  
     ```
 
 2. **Retag the image:**
     
     ```bash
-    sudo docker tag <UNTAGGED_IMAGE_ID> <REPOSITORY:TAG>
-    # Example: sudo docker tag 1a072cac928d nextcloud:latest
+        sudo docker tag <UNTAGGED_IMAGE_ID> <REPOSITORY:TAG>
+        # Example: sudo docker tag 1a072cac928d nextcloud:latest
     ```
     
 
@@ -187,7 +187,7 @@ This was the most critical step for service functionality. Volumes must have the
 To identify which service a volume belongs to on the original server:
 
     ```bash
-    docker ps -a --filter volume=4d4abcebbb...
+        docker ps -a --filter volume=4d4abcebbb...
     ```
 
 Below are some examples:
@@ -205,11 +205,11 @@ Migration was trivial using **Bind Mounts**. The directories were copied and the
 - **Action:** The restored volume was copied into Docker's directory (`/var/lib/docker/volumes/`) and permissions on the `_data` directory were corrected.
     
     ```bash
-    # Copy the volume to the Docker directory
-    cp -r grafana_grafana_storage /var/lib/docker/volumes/
+        # Copy the volume to the Docker directory
+        cp -r grafana_grafana_storage /var/lib/docker/volumes/
     
-    # Adjust owner (472 is the default UID of 'grafana' in the image)
-    sudo chown -R 472:root /var/lib/docker/volumes/grafana_grafana_storage/_data
+        # Adjust owner (472 is the default UID of 'grafana' in the image)
+        sudo chown -R 472:root /var/lib/docker/volumes/grafana_grafana_storage/_data
     ```
     
 
@@ -226,12 +226,12 @@ Nextcloud required migration of several volumes (`nextcloudv3_db`, Redis volumes
 1. **Bind mount permission fix (`./html`):**
         
         ```bash
-        sudo chown -R www-data:www-data html
+            sudo chown -R www-data:www-data html
         ```
 2. **Volume permission fix (`nextcloudv3_db`, etc.):**
         
         ```bash
-        sudo chown -R www-data:www-data /var/lib/docker/volumes/nextcloudv3_db/_data
+            sudo chown -R www-data:www-data /var/lib/docker/volumes/nextcloudv3_db/_data
         ```
         
 3. **Edit `config.php`:**  
