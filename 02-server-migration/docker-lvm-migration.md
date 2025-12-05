@@ -204,13 +204,13 @@ Migration was trivial using **Bind Mounts**. The directories were copied and the
     
 - **Action:** The restored volume was copied into Docker's directory (`/var/lib/docker/volumes/`) and permissions on the `_data` directory were corrected.
     
-    ```bash
-        # Copy the volume to the Docker directory
-        cp -r grafana_grafana_storage /var/lib/docker/volumes/
+```bash
+# Copy the volume to the Docker directory
+cp -r grafana_grafana_storage /var/lib/docker/volumes/
     
-        # Adjust owner (472 is the default UID of 'grafana' in the image)
-        sudo chown -R 472:root /var/lib/docker/volumes/grafana_grafana_storage/_data
-    ```
+# Adjust owner (472 is the default UID of 'grafana' in the image)
+sudo chown -R 472:root /var/lib/docker/volumes/grafana_grafana_storage/_data
+```
     
 
 Then `docker compose up -d` was executed. At this point you must have the recreated or original `docker-compose.yml`. Usually they don't differ much and depend on whether Docker-managed volumes or bind mounts were used.
@@ -225,14 +225,14 @@ Nextcloud required migration of several volumes (`nextcloudv3_db`, Redis volumes
     
 1. **Bind mount permission fix (`./html`):**
         
-        ```bash
-            sudo chown -R www-data:www-data html
-        ```
+    ```bash
+    sudo chown -R www-data:www-data html
+    ```
 2. **Volume permission fix (`nextcloudv3_db`, etc.):**
         
-        ```bash
-            sudo chown -R www-data:www-data /var/lib/docker/volumes/nextcloudv3_db/_data
-        ```
+    ```bash
+    sudo chown -R www-data:www-data /var/lib/docker/volumes/nextcloudv3_db/_data
+    ```
         
 3. **Edit `config.php`:**  
         The file `html/config/config.php` must be updated to remove references to the previous environment (e.g., HTTPS with Caddy if the new server uses HTTP/Nginx).  
