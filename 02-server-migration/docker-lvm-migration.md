@@ -186,9 +186,9 @@ Since images were backed up without clear tags, they had to be loaded and manual
 This was the most critical step for service functionality. Volumes must have the correct **owner (UID)** and **group (GID)** so the process inside the container can access them.  
 To identify which service a volume belongs to on the original server:
 
-    ```bash
-        docker ps -a --filter volume=4d4abcebbb...
-    ```
+```bash
+ docker ps -a --filter volume=4d4abcebbb...
+ ```
 
 Below are some examples:
 
