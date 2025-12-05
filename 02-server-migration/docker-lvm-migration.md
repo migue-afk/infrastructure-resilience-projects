@@ -168,10 +168,10 @@ Since images were backed up without clear tags, they had to be loaded and manual
     
     The output would be:
     
-```bash
+    ```bash
 	REPOSITORY TAG IMAGE ID  
 	1a072cac928d  
-```
+    ```
 
 2. **Retag the image:**
     
@@ -186,9 +186,9 @@ Since images were backed up without clear tags, they had to be loaded and manual
 This was the most critical step for service functionality. Volumes must have the correct **owner (UID)** and **group (GID)** so the process inside the container can access them.  
 To identify which service a volume belongs to on the original server:
 
-```bash
-docker ps -a --filter volume=4d4abcebbb...
-```
+    ```bash
+    docker ps -a --filter volume=4d4abcebbb...
+    ```
 
 Below are some examples:
 
@@ -223,19 +223,18 @@ Nextcloud required migration of several volumes (`nextcloudv3_db`, Redis volumes
     
 - **Action:** Permissions were corrected both for managed volumes and the bind mount.
     
-    1. **Bind mount permission fix (`./html`):**
+1. **Bind mount permission fix (`./html`):**
         
         ```bash
         sudo chown -R www-data:www-data html
         ```
-        
-    2. **Volume permission fix (`nextcloudv3_db`, etc.):**
+2. **Volume permission fix (`nextcloudv3_db`, etc.):**
         
         ```bash
         sudo chown -R www-data:www-data /var/lib/docker/volumes/nextcloudv3_db/_data
         ```
         
-    3. **Edit `config.php`:**  
+3. **Edit `config.php`:**  
         The file `html/config/config.php` must be updated to remove references to the previous environment (e.g., HTTPS with Caddy if the new server uses HTTP/Nginx).  
         Otherwise the container fails to start:
         
