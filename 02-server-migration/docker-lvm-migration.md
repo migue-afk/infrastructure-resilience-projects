@@ -235,10 +235,12 @@ Nextcloud required migration of several volumes (`nextcloudv3_db`, Redis volumes
     ```
         
 3. **Edit `config.php`:**  
-        The file `html/config/config.php` must be updated to remove references to the previous environment (e.g., HTTPS with Caddy if the new server uses HTTP/Nginx).  
-        Otherwise the container fails to start:
+
+
+    The file `html/config/config.php` must be updated to remove references to the previous environment ![config.php_https](files/config.php_https) (e.g., HTTPS with Caddy if the new server uses HTTP/Nginx).  
+    Otherwise the container fails to start: 
         
-        > `Error: Configuration was not read or initialized correctly, not overwriting /var/www/html/config/config.php`
+    > `Error: Configuration was not read or initialized correctly, not overwriting /var/www/html/config/config.php`
         
 
 ---
