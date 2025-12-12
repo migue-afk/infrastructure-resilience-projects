@@ -99,6 +99,7 @@ With available space, a _snapshot_ of the root LV (`/dev/mapper/debianhp--vg-roo
     
     Note: 
     > After performing the merge, the _snapshot_ is deleted, so it is advisable to create a new one or store it safely.
+    
     > If you are using a new physical volume with an external drive, remember to connect it before starting the machine.
     
 
